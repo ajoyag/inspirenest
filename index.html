@@ -99,26 +99,60 @@
             transition: opacity 0.5s ease-in-out;
         }
         
-        /* --- STYLES FOR ENHANCED COLLECTION CARDS --- */
-        .collection-card .card-content {
-            transform: translateY(calc(100% - 80px)); /* Adjust this value to control how much title is shown */
-            transition: transform 0.4s ease-in-out;
+        /* --- NEW STYLES FOR SIGNATURE BOXES --- */
+        .signature-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            z-index: 1;
         }
-        .collection-card:hover .card-content {
-            transform: translateY(0);
+        .signature-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            z-index: 20;
         }
-        .collection-card .card-details {
+        .signature-card-content {
+            position: relative;
+            z-index: 2;
+        }
+        .signature-card .card-header {
+            transition: opacity 0.4s ease;
+        }
+        .signature-card:hover .card-header {
             opacity: 0;
-            transition: opacity 0.4s ease 0.1s;
         }
-        .collection-card:hover .card-details {
+        .signature-card .text-content, .signature-card .text-content p, .signature-card .text-content h3 {
+            transition: color 0.4s ease;
+        }
+        .signature-card:hover .text-content h3, .signature-card:hover .text-content p {
+            color: white;
+        }
+        .signature-card .tag {
+             transition: all 0.4s ease;
+        }
+        .signature-card:hover .tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .signature-card::before, .signature-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 0;
+        }
+        .signature-card::before {
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+        }
+        .signature-card::after {
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+        }
+        .signature-card:hover::before, .signature-card:hover::after {
             opacity: 1;
-        }
-        .collection-card img {
-            transition: transform 0.5s ease;
-        }
-        .collection-card:hover img {
-            transform: scale(1.1);
         }
     </style>
 </head>
@@ -186,7 +220,7 @@
                         ✨ At Inspire Nest, our purpose goes beyond planning events or delivering gifts. We exist to bring people closer, to spread joy, and to create memories that last a lifetime. Every moment we touch is carefully crafted to make someone smile, strengthen relationships, and celebrate life’s most precious milestones. 🌸
                     </p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/selection-bg.jpg');">
+                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/magic-pic1.png');">
                             <div class="trust-card-content p-8 text-center h-full flex flex-col justify-center">
                                 <div class="icon-circle bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
                                     <svg class="icon-svg w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
@@ -195,7 +229,7 @@
                                 <p class="hover-text-white text-gray-700">Hand-selected themed boxes ready for immediate delivery, perfect for any milestone.</p>
                             </div>
                         </div>
-                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/design-bg.jpg');">
+                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/magic-pic2.png');">
                             <div class="trust-card-content p-8 text-center h-full flex flex-col justify-center">
                                 <div class="icon-circle bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
                                     <svg class="icon-svg w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
@@ -204,7 +238,7 @@
                                 <p class="hover-text-white text-gray-700">A dedicated consultation to craft a unique presentation tailored precisely to your recipient.</p>
                             </div>
                         </div>
-                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/luxury-bg.jpg');">
+                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/magic-pic3.png');">
                             <div class="trust-card-content p-8 text-center h-full flex flex-col justify-center">
                                 <div class="icon-circle bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
                                     <svg class="icon-svg w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
@@ -224,7 +258,7 @@
                         We specialize in creating extraordinary experiences that bring people together
                     </p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
-                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/calendar-bg.jpg');">
+                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/trust-pic2.png');">
                             <div class="trust-card-content p-8 text-center h-full flex flex-col justify-center">
                                 <div class="icon-circle bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
                                     <svg class="icon-svg w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -233,7 +267,7 @@
                                 <p class="hover-text-white text-gray-700">Remember every important occasion and celebration</p>
                             </div>
                         </div>
-                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/surprise-bg.jpg');">
+                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/trust-pic2.png');">
                              <div class="trust-card-content p-8 text-center h-full flex flex-col justify-center">
                                 <div class="icon-circle bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
                                     <svg class="icon-svg w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.152L12 3.75l.951-1.598a1 1 0 011.664.998l-.297 1.942 1.488 1.487a1 1 0 01.177 1.258l-1.077 1.862 1.848.497a1 1 0 01.691 1.636l-1.116 1.465.748 1.868a1 1 0 01-1.35.856l-1.92-.124-.134 1.916a1 1 0 01-1.996.082L12 19.25l-.951 1.598a1 1 0 01-1.664-.998l.297-1.942-1.488-1.487a1 1 0 01-.177-1.258l1.077-1.862-1.848-.497a1 1 0 01-.691-1.636l1.116-1.465-.748-1.868a1 1 0 011.35-.856l1.92.124.134-1.916a1 1 0 011.996-.082z"></path></svg>
@@ -242,7 +276,7 @@
                                 <p class="hover-text-white text-gray-700">Creating unexpected moments of pure joy</p>
                             </div>
                         </div>
-                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/celebrate-bg.jpg');">
+                        <div class="trust-card bg-white rounded-2xl shadow-lg border border-gray-100" style="--bg-image: url('images/trust-pic3.png');">
                              <div class="trust-card-content p-8 text-center h-full flex flex-col justify-center">
                                 <div class="icon-circle bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
                                     <svg class="icon-svg w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19V6.268C5 5.564 5.253 4.904 5.672 4.385l.59-.738C6.678 3.193 7.553 3 8.423 3H15.577c.87 0 1.745.193 2.221.647l.59.738C18.747 4.904 19 5.564 19 6.268V19m-7-3v4M8 11h8"></path></svg>
@@ -260,46 +294,49 @@
                     <h2 class="text-4xl md:text-5xl font-bold font-display text-center mb-16 text-white">Explore Our Signature Boxes</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         <!-- Collection Card 1 -->
-                        <div class="collection-card group relative rounded-2xl shadow-xl overflow-hidden h-[420px]">
-                            <img src="https://placehold.co/600x400/F472B6/white?text=The+Serenity+Box" alt="The Serenity Box" class="absolute inset-0 w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-                            <div class="card-content absolute inset-0 p-6 flex flex-col justify-end">
-                                <h3 class="card-title font-display text-white text-2xl font-bold">The Coastal Calm Box</h3>
-                                <div class="card-details mt-4">
-                                    <p class="text-gray-200 mb-4">Dedicated to relaxation, featuring artisanal bath products and luxurious soft goods.</p>
+                        <div class="signature-card bg-white rounded-2xl shadow-lg" style="--bg-image: url('images/collection-1.jpg');">
+                            <div class="signature-card-content">
+                                <div class="card-header bg-pink-400 h-48 flex items-center justify-center rounded-t-2xl">
+                                    <h4 class="text-white text-xl font-bold font-display">The Serenity Box</h4>
+                                </div>
+                                <div class="text-content p-6">
+                                    <h3 class="text-2xl font-semibold font-display mb-2 text-gray-900">The Coastal Calm Box</h3>
+                                    <p class="text-gray-700 mb-4">Dedicated to relaxation, featuring artisanal bath products and luxurious soft goods.</p>
                                     <div class="flex flex-wrap gap-2">
-                                        <span class="text-xs font-medium bg-pink-100/80 text-pink-800 px-3 py-1 rounded-full">Self-Care</span>
-                                        <span class="text-xs font-medium bg-yellow-100/80 text-yellow-800 px-3 py-1 rounded-full">Spa Day</span>
+                                        <span class="tag text-xs font-medium bg-pink-100 text-pink-800 px-3 py-1 rounded-full">Self-Care</span>
+                                        <span class="tag text-xs font-medium bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full">Spa Day</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Collection Card 2 -->
-                        <div class="collection-card group relative rounded-2xl shadow-xl overflow-hidden h-[420px]">
-                            <img src="https://placehold.co/600x400/2DD4BF/white?text=The+Gourmet+Journey" alt="The Gourmet Journey" class="absolute inset-0 w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-                            <div class="card-content absolute inset-0 p-6 flex flex-col justify-end">
-                                <h3 class="card-title font-display text-white text-2xl font-bold">The Connoisseur Collection</h3>
-                                <div class="card-details mt-4">
-                                    <p class="text-gray-200 mb-4">A selection of fine chocolates, rare coffees, and premium small-batch treats.</p>
+                        <div class="signature-card bg-white rounded-2xl shadow-lg" style="--bg-image: url('images/collection-2.jpg');">
+                            <div class="signature-card-content">
+                                <div class="card-header bg-teal-400 h-48 flex items-center justify-center rounded-t-2xl">
+                                    <h4 class="text-white text-xl font-bold font-display">The Gourmet Journey</h4>
+                                </div>
+                                <div class="text-content p-6">
+                                    <h3 class="text-2xl font-semibold font-display mb-2 text-gray-900">The Connoisseur Collection</h3>
+                                    <p class="text-gray-700 mb-4">A selection of fine chocolates, rare coffees, and premium small-batch treats.</p>
                                     <div class="flex flex-wrap gap-2">
-                                        <span class="text-xs font-medium bg-green-100/80 text-green-800 px-3 py-1 rounded-full">Epicurean</span>
-                                        <span class="text-xs font-medium bg-blue-100/80 text-blue-800 px-3 py-1 rounded-full">Host Gift</span>
+                                        <span class="tag text-xs font-medium bg-green-100 text-green-800 px-3 py-1 rounded-full">Epicurean</span>
+                                        <span class="tag text-xs font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Host Gift</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Collection Card 3 -->
-                        <div class="collection-card group relative rounded-2xl shadow-xl overflow-hidden h-[420px]">
-                            <img src="https://placehold.co/600x400/F05252/white?text=The+Artisan+Crafter" alt="The Artisan Crafter" class="absolute inset-0 w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-                            <div class="card-content absolute inset-0 p-6 flex flex-col justify-end">
-                                <h3 class="card-title font-display text-white text-2xl font-bold">The Studio Starter Kit</h3>
-                                <div class="card-details mt-4">
-                                    <p class="text-gray-200 mb-4">Everything needed to begin a new creative pursuit, from sketching to ceramics.</p>
+                        <div class="signature-card bg-white rounded-2xl shadow-lg" style="--bg-image: url('images/collection-3.jpg');">
+                            <div class="signature-card-content">
+                                <div class="card-header bg-red-500 h-48 flex items-center justify-center rounded-t-2xl">
+                                    <h4 class="text-white text-xl font-bold font-display">The Artisan Crafter</h4>
+                                </div>
+                                <div class="text-content p-6">
+                                    <h3 class="text-2xl font-semibold font-display mb-2 text-gray-900">The Studio Starter Kit</h3>
+                                    <p class="text-gray-700 mb-4">Everything needed to begin a new creative pursuit, from sketching to ceramics.</p>
                                     <div class="flex flex-wrap gap-2">
-                                        <span class="text-xs font-medium bg-blue-100/80 text-blue-800 px-3 py-1 rounded-full">Creativity</span>
-                                        <span class="text-xs font-medium bg-purple-100/80 text-purple-800 px-3 py-1 rounded-full">Inspiration</span>
+                                        <span class="tag text-xs font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Creativity</span>
+                                        <span class="tag text-xs font-medium bg-purple-100 text-purple-800 px-3 py-1 rounded-full">Inspiration</span>
                                     </div>
                                 </div>
                             </div>
