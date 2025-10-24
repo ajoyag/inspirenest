@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InspireNest</title>
+    <link rel="icon" type="image/svg+xml" href="inspirenest-title_logo.ico">
     <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Inter and Comfortaa fonts --><link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,11 +88,14 @@
         <!-- Header / Navigation -->
         <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
             <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-                <!-- Logo -->
-                <a href="#" class="text-3xl font-bold text-gray-900 font-display">InspireNest</a>
+                <!-- Logo (Replaced with Image Placeholder) -->
+                <a href="#" class="text-3xl font-bold text-gray-900 font-display">
+                    <img src="inspirenest-logo.png" alt="Inspire Nest Logo" class="h-8 md:h-10 w-auto">
+                </a>
                 
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex space-x-8">
+                    <a href="#team" class="text-gray-700 hover:text-pink-600 transition duration-300 font-medium">Our Visionaries</a>
                     <a href="#services" class="text-gray-700 hover:text-pink-600 transition duration-300 font-medium">Our Approach</a>
                     <a href="#trust" class="text-gray-700 hover:text-pink-600 transition duration-300 font-medium">Why Us</a>
                     <a href="#collections" class="text-gray-700 hover:text-pink-600 transition duration-300 font-medium">Curations</a>
@@ -115,6 +119,7 @@
 
             <!-- Mobile Menu (with transition classes) -->
             <div id="mobile-menu" class="md:hidden absolute top-16 left-0 right-0 z-40 bg-white/90 shadow-lg mobile-menu-transition hidden">
+                <a href="#team" class="block px-6 py-3 text-gray-700 hover:bg-pink-50">Our Visionaries</a>
                 <a href="#services" class="block px-6 py-3 text-gray-700 hover:bg-pink-50">Our Approach</a>
                 <a href="#trust" class="block px-6 py-3 text-gray-700 hover:bg-pink-50">Why Us</a>
                 <a href="#collections" class="block px-6 py-3 text-gray-700 hover:bg-pink-50">Curations</a>
@@ -125,8 +130,7 @@
         </header>
 
         <main>
-            <!-- Hero Section -->
-            <section id="hero" class="py-24 md:py-32 bg-transparent">
+            <!-- Hero Section --><section id="hero" class="py-24 md:py-32 bg-transparent">
                 <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
                     <!-- Hero Text --><div class="text-center md:text-left">
                         <h1 class="text-5xl md:text-7xl font-bold font-display mb-6 leading-tight text-gray-900">
@@ -157,21 +161,21 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <!-- Founder 1 -->
                         <div class="bg-blue-50 p-8 rounded-xl shadow-lg flex flex-col items-center text-center">
-                            <img src="https://placehold.co/150x150/FFC0CB/white?text=Founder+1" alt="Founder Profile" class="w-36 h-36 rounded-full mb-4 shadow-md object-cover">
-                            <h3 class="text-2xl font-semibold font-display text-gray-900 mb-1">Ayesha Sharma</h3>
-                            <p class="text-pink-600 font-medium mb-4">Founder & CEO</p>
+                            <img src="anithapic.png" alt="Founder Profile" class="w-36 h-36 rounded-full mb-4 shadow-md object-cover">
+                            <h3 class="text-2xl font-semibold font-display text-gray-900 mb-1">Anitha Ganesh</h3>
+                            <p class="text-pink-600 font-medium mb-4">Founder | Culture Architect</p>
                             <p class="text-gray-700">
-                                Ayesha leads the creative vision, ensuring that Inspire Nest remains synonymous with elegance, quality, and heartfelt intent. She believes gifting is an art form.
+                                A visionary entrepreneur with a passion for engagement and culture, Anitha leverages NLP to blend strategy and empathy-building meaningful connections and impactful workplace experiences.
                             </p>
                         </div>
                         
-                        <!-- Co-Founder 1 -->
+                        <!-- Founder 2 -->
                         <div class="bg-blue-50 p-8 rounded-xl shadow-lg flex flex-col items-center text-center">
-                            <img src="https://placehold.co/150x150/ADD8E6/white?text=Co-Founder+1" alt="Co-Founder Profile" class="w-36 h-36 rounded-full mb-4 shadow-md object-cover">
-                            <h3 class="text-2xl font-semibold font-display text-gray-900 mb-1">Rahul Menon</h3>
-                            <p class="text-green-600 font-medium mb-4">Co-Founder & Head of Operations</p>
+                            <img src="sathyapic.png" alt="Co-Founder Profile" class="w-36 h-36 rounded-full mb-4 shadow-md object-cover">
+                            <h3 class="text-2xl font-semibold font-display text-gray-900 mb-1">Sathiya S</h3>
+                            <p class="text-green-600 font-medium mb-4">Founder | Tech Visionary & Serial Entrepreneur</p>
                             <p class="text-gray-700">
-                                Rahul manages the flawless flow of gifts and events, integrating logistics with personalized service to deliver joy seamlessly across regions.
+                                A US-returned serial entrepreneur from Hosur, passionate about tech-driven solutions that elevate human potential. Formerly with Dell and Cognizant, he has helped scale and successfully exit two startups.
                             </p>
                         </div>
                     </div>
@@ -185,7 +189,8 @@
                     
                     <!-- Purpose Statement -->
                     <p class="text-center text-blue-100 text-xl max-w-4xl mx-auto mb-16">
-                        Our Purpose: ✨ At Inspire Nest, our purpose goes beyond planning events or delivering gifts. We exist to bring people closer, to spread joy, and to create memories that last a lifetime. Every moment we touch is carefully crafted to make someone smile, strengthen relationships, and celebrate life’s most precious milestones. 🌸
+                        <span class="text-xl md:text-2xl text-gray-700 mb-10 max-w-lg mx-auto md:mx-0">Our Purpose: </span><br> 
+                        ✨ At Inspire Nest, our purpose goes beyond planning events or delivering gifts. We exist to bring people closer, to spread joy, and to create memories that last a lifetime. Every moment we touch is carefully crafted to make someone smile, strengthen relationships, and celebrate life’s most precious milestones. 🌸
                     </p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
