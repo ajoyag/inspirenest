@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog - InspireNest</title>
+    <link rel="icon" type="image/svg+xml" href="inspirenest-title_logo.ico">
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter, Comfortaa, and Nunito fonts --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom styles --><style>
+        body { font-family: 'Inter', sans-serif; color: #333; background-color: #f8fafc; }
+        .font-display { font-family: 'Comfortaa', cursive; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: #db2777; border-radius: 50%; cursor: pointer; margin-top: -6px; }
+        input[type=range]::-moz-range-thumb { width: 16px; height: 16px; background: #db2777; border-radius: 50%; cursor: pointer; }
+        .dropdown-menu::-webkit-scrollbar { display: none; }
+        .dropdown-menu { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold text-gray-900 font-display">
+                <img src="inspirenest-logo.png" alt="Inspire Nest Logo" class="h-8 md:h-10 w-auto">
+            </a>
+            <div class="hidden md:flex flex-grow justify-center space-x-8">
+                <a href="index.html#services" class="text-gray-700 hover:text-pink-600 transition duration-300 font-medium">Our Approach</a>
+                <a href="index.html#trust" class="text-gray-700 hover:text-pink-600 transition duration-300 font-medium">Why Us</a>
+                <a href="index.html#collections" class="text-gray-700 hover:text-pink-600 transition duration-300 font-medium">Curations</a>
+                <a href="catalog-ecommerce.html" class="text-pink-600 font-semibold transition duration-300">Catalog</a>
+                <a href="index.html#contact" class="text-gray-700 hover:text-pink-600 transition duration-300 font-medium">Contact Us</a>
+            </div>
+            <!-- Country and Currency Selectors -->
+            <div class="hidden md:flex items-center gap-4">
+                <div class="relative">
+                    <button id="country-selector-btn" class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-pink-600">
+                        <span id="selected-country-flag">🇮🇳</span>
+                        <span id="selected-country-code">IND</span>
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="country-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 hidden dropdown-menu max-h-60 overflow-y-auto">
+                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-country-code="IND" data-flag="🇮🇳" data-currency="INR" data-locale="en-IN">🇮🇳 India</a>
+                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-country-code="USA" data-flag="🇺🇸" data-currency="USD" data-locale="en-US">🇺🇸 United States</a>
+                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-country-code="EUR" data-flag="🇪🇺" data-currency="EUR" data-locale="de-DE">🇪🇺 Europe</a>
+                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-country-code="GBR" data-flag="🇬🇧" data-currency="GBP" data-locale="en-GB">🇬🇧 United Kingdom</a>
+                        <a href="#" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-country-code="CAN" data-flag="🇨🇦" data-currency="CAD" data-locale="en-CA">🇨🇦 Canada</a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <button id="currency-selector-btn" class="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-pink-600">
+                        <span id="selected-currency">INR</span>
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="currency-dropdown" class="absolute right-0 mt-2 w-28 bg-white rounded-md shadow-lg py-1 z-20 hidden">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-currency="INR" data-locale="en-IN">INR (₹)</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-currency="USD" data-locale="en-US">USD ($)</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-currency="EUR" data-locale="de-DE">EUR (€)</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-currency="GBP" data-locale="en-GB">GBP (£)</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold font-display text-gray-900">Explore Our Catalog</h1>
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Find the perfect gift from our collection of curated items and experiences.</p>
+        </div>
+
+        <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+            <!-- Filters Sidebar -->
+            <aside class="hidden lg:block lg:col-span-1">
+                <form id="filters-sidebar" class="space-y-6 p-6 bg-white rounded-lg shadow-sm sticky top-24">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">Category</h3>
+                        <div class="space-y-2 mt-3">
+                            <div class="flex items-center"><input type="checkbox" id="cat-gift-box" data-filter="tag" value="Gift Box" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="cat-gift-box" class="ml-2 text-gray-600">Gift Boxes</label></div>
+                            <div class="flex items-center"><input type="checkbox" id="cat-combo" data-filter="tag" value="Combo" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="cat-combo" class="ml-2 text-gray-600">Combos</label></div>
+                            <div class="flex items-center"><input type="checkbox" id="cat-gourmet" data-filter="tag" value="Gourmet" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="cat-gourmet" class="ml-2 text-gray-600">Gourmet</label></div>
+                            <div class="flex items-center"><input type="checkbox" id="cat-creative" data-filter="tag" value="Creative" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="cat-creative" class="ml-2 text-gray-600">Creative</label></div>
+                            <div class="flex items-center"><input type="checkbox" id="cat-self-care" data-filter="tag" value="Self-Care" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="cat-self-care" class="ml-2 text-gray-600">Self-Care</label></div>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3 border-b pb-2">Occasion</h3>
+                        <div class="space-y-2 mt-3">
+                            <div class="flex items-center"><input type="checkbox" id="occ-birthday" data-filter="tag" value="Birthday" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="occ-birthday" class="ml-2 text-gray-600">Birthday</label></div>
+                            <div class="flex items-center"><input type="checkbox" id="occ-anniversary" data-filter="tag" value="Anniversary" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="occ-anniversary" class="ml-2 text-gray-600">Anniversary</label></div>
+                            <div class="flex items-center"><input type="checkbox" id="occ-corporate" data-filter="tag" value="Corporate" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="occ-corporate" class="ml-2 text-gray-600">Corporate</label></div>
+                            <div class="flex items-center"><input type="checkbox" id="occ-thank-you" data-filter="tag" value="Thank You" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="occ-thank-you" class="ml-2 text-gray-600">Thank You</label></div>
+                            <div class="flex items-center"><input type="checkbox" id="occ-romance" data-filter="tag" value="Romance" class="h-4 w-4 rounded border-gray-300 text-pink-600 focus:ring-pink-500"> <label for="occ-romance" class="ml-2 text-gray-600">Romance</label></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Max Price</h3>
+                        <div class="mt-4">
+                            <input id="price-range" type="range" min="20" max="300" value="300" step="10" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-sm text-gray-600 mt-2">
+                                <span id="min-price-label"></span>
+                                <span>Up to <span id="price-value"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t">
+                         <button type="submit" class="w-full bg-pink-600 text-white font-semibold py-2 rounded-lg hover:bg-pink-700 transition-colors">Apply Filters</button>
+                         <button type="reset" class="w-full mt-2 bg-gray-200 text-gray-700 font-semibold py-2 rounded-lg hover:bg-gray-300 transition-colors">Reset</button>
+                    </div>
+                </form>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="mt-8 lg:mt-0 lg:col-span-3">
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+                    <div class="relative w-full sm:w-auto flex-grow">
+                        <input type="search" id="search-input" placeholder="Search for products..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:ring-pink-500 focus:border-pink-500">
+                        <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <div class="flex items-center gap-4 w-full sm:w-auto">
+                        <button id="filter-btn" class="lg:hidden w-1/2 sm:w-auto flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h9m-9 4h13m0-4l3 3m0 0l-3 3m3-3H6"></path></svg>
+                            Filters
+                        </button>
+                        <select id="sort-select" class="w-1/2 sm:w-auto border border-gray-300 rounded-md py-2 px-3 focus:ring-pink-500 focus:border-pink-500">
+                            <option value="popular">Sort by: Popular</option>
+                            <option value="newest">Sort by: Newest</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="mobile-filters" class="hidden lg:hidden mb-6 bg-white p-4 rounded-lg shadow-sm"></div>
+                <div id="active-filters-container" class="flex flex-wrap gap-2 items-center mb-6 min-h-[32px]"></div>
+
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+                <div id="no-results" class="hidden text-center py-16">
+                    <h3 class="text-2xl font-semibold text-gray-700">No Products Found</h3>
+                    <p class="mt-2 text-gray-500">Try adjusting your filters or search term.</p>
+                </div>
+                
+                <nav id="pagination-container" class="flex items-center justify-center mt-12" aria-label="Pagination"></nav>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-300 py-16 mt-16">
+        <div class="container mx-auto px-6">
+             <div class="text-center">
+                 <p class="text-sm text-gray-400">&copy; 2024 Inspire Nest. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let currencyConfig = { locale: 'en-IN', currency: 'INR' };
+        const conversionRates = { USD: 1, INR: 83, EUR: 0.9, GBP: 0.8, CAD: 1.4 };
+        const basePriceMin = 20;
+        const basePriceMax = 300;
+
+        const products = [
+            { id: 1, name: 'Ultimate Serenity Kit', image: 'images/collection1.png', tags: ['Signature', 'Self-Care', 'Gift Box', 'Birthday', 'Thank You'], price: 169.99, originalPrice: 215.00, rating: 4.9, reviews: 124, popular: true, date: '2024-05-20', description: ['Hand-poured soy candle', 'Artisanal bath bombs & soap', 'Plush microfiber robe', 'Gourmet dark chocolate', 'Personalized handwritten note'] },
+            { id: 2, name: 'Gourmet Explorer Crate', image: 'images/collection2.png', tags: ['Signature', 'Gourmet', 'Combo', 'Thank You', 'Corporate'], price: 129.99, originalPrice: 155.00, rating: 4.8, reviews: 98, popular: true, date: '2024-05-18', description: ['Small-batch coffee beans', 'Artisanal cheese & crackers', 'Fig & orange preserves', 'Premium olive oil'] },
+            { id: 3, name: 'Anniversary Romance Box', image: 'https://via.placeholder.com/400x300/fecaca/9f1239?text=Anniversary+Set', tags: ['Signature', 'Romance', 'Gift Box', 'Anniversary'], price: 199.99, originalPrice: 250.00, rating: 5.0, reviews: 210, popular: true, date: '2024-05-15', description: ['Premium champagne bottle', 'Two crystal flutes', 'Luxury chocolate truffles', 'Rose petal bath soak'] },
+            { id: 4, name: 'Executive Welcome Kit', image: 'https://via.placeholder.com/400x300/dbeafe/1e3a8a?text=Corporate+Thanks', tags: ['Signature', 'Corporate', 'Gift Box'], price: 149.99, originalPrice: 180.00, rating: 4.9, reviews: 150, popular: false, date: '2024-05-10', description: ['Branded leather notebook', 'Executive fountain pen', 'Insulated coffee mug', 'Gourmet coffee sampler'] },
+            { id: 5, name: 'Creative Studio Starter', image: 'images/collection3.png', tags: ['Signature', 'Creative', 'Gift Box', 'Birthday'], price: 119.99, originalPrice: 140.00, rating: 4.7, reviews: 85, popular: false, date: '2024-04-28', description: ['A4 Sketchbook & charcoal pencils', '24-color watercolor paint set', 'Beginner\'s guide to painting', 'Fine-line ink pens'] },
+            { id: 6, name: 'Coffee & Chocolate Duo', image: 'https://via.placeholder.com/400x300/a16207/fefce8?text=Coffee+Duo', tags: ['Gourmet', 'Combo', 'Thank You', 'Birthday'], price: 59.99, originalPrice: 70.00, rating: 4.7, reviews: 130, popular: true, date: '2024-05-21', description: ['Artisan ground coffee', 'Assorted dark chocolate bars'] },
+            { id: 7, name: 'Spa Night In', image: 'https://via.placeholder.com/400x300/a5b4fc/e0e7ff?text=Spa+Night', tags: ['Self-Care', 'Combo', 'Birthday'], price: 65.00, originalPrice: 80.00, rating: 4.8, reviews: 112, popular: false, date: '2024-05-19', description: ['Lavender bath bomb', 'Silk sleep mask', 'Calming face mist'] },
+            { id: 8, name: 'Movie Night Special', image: 'https://via.placeholder.com/400x300/ef4444/fee2e2?text=Movie+Night', tags: ['Gourmet', 'Combo', 'Thank You'], price: 55.50, originalPrice: 65.00, rating: 4.6, reviews: 95, popular: true, date: '2024-05-17', description: ['Gourmet popcorn kernels', 'Set of unique seasonings', 'Classic candy selection'] },
+            { id: 9, name: 'Writer\'s Block Breaker', image: 'https://via.placeholder.com/400x300/4ade80/f0fdf4?text=Writer+Kit', tags: ['Creative', 'Combo', 'Corporate'], price: 79.00, originalPrice: 95.00, rating: 4.9, reviews: 68, popular: false, date: '2024-05-14', description: ['Pocket journal', 'Set of fine-point pens', 'Inspiring quotes book'] },
+            { id: 10, name: 'Morning Ritual Kit', image: 'https://via.placeholder.com/400x300/fbbf24/fffbeb?text=Morning+Ritual', tags: ['Self-Care', 'Gourmet', 'Combo', 'Birthday'], price: 85.00, originalPrice: 100.00, rating: 4.8, reviews: 102, popular: true, date: '2024-05-23', description: ['Hand-crafted ceramic mug', 'Herbal tea selection', 'Honey sticks'] },
+            { id: 11, name: 'Lavender Soy Candle', image: 'https://via.placeholder.com/400x300/c4b5fd/f5f3ff?text=Candle', tags: ['Self-Care', 'Thank You'], price: 24.99, originalPrice: 30.00, rating: 4.9, reviews: 250, popular: true, date: '2024-05-25', description: ['Hand-poured with natural soy wax', 'Scented with pure lavender oil'] },
+            { id: 12, name: 'Plush Microfiber Robe', image: 'https://via.placeholder.com/400x300/f9a8d4/fdf2f8?text=Robe', tags: ['Self-Care', 'Birthday'], price: 55.00, originalPrice: 70.00, rating: 4.8, reviews: 180, popular: false, date: '2024-05-11', description: ['Ultra-soft and absorbent', 'Available in three sizes'] },
+            { id: 13, name: 'Artisanal Chocolate Box', image: 'https://via.placeholder.com/400x300/78350f/f3e8ff?text=Chocolates', tags: ['Gourmet', 'Anniversary', 'Romance'], price: 35.00, originalPrice: 40.00, rating: 4.9, reviews: 310, popular: true, date: '2024-05-24', description: ['12-piece assorted truffles', 'Made with Belgian chocolate'] },
+            { id: 14, name: 'Leather-bound Journal', image: 'https://via.placeholder.com/400x300/ca8a04/fef9c3?text=Journal', tags: ['Creative', 'Corporate'], price: 29.99, originalPrice: 35.00, rating: 4.7, reviews: 140, popular: false, date: '2024-04-30', description: ['Genuine leather cover', '200 lined pages'] },
+            { id: 15, name: 'Gourmet Coffee Sampler', image: 'https://via.placeholder.com/400x300/44403c/f5f5f4?text=Coffee', tags: ['Gourmet', 'Thank You'], price: 32.00, originalPrice: 38.00, rating: 4.8, reviews: 190, popular: true, date: '2024-05-16', description: ['Four unique single-origin coffees', 'Whole bean or ground option'] },
+            { id: 16, name: 'Crystal Wine Decanter', image: 'https://via.placeholder.com/400x300/9ca3af/f9fafb?text=Decanter', tags: ['Gourmet', 'Anniversary', 'Corporate'], price: 68.00, originalPrice: 80.00, rating: 4.9, reviews: 75, popular: false, date: '2024-04-15', description: ['Lead-free crystal glass', 'Enhances aeration and aroma'] },
+            { id: 17, name: 'Watercolor Paint Set', image: 'https://via.placeholder.com/400x300/60a5fa/eff6ff?text=Paints', tags: ['Creative', 'Birthday'], price: 45.00, originalPrice: 55.00, rating: 4.7, reviews: 115, popular: false, date: '2024-03-28', description: ['36 vibrant watercolor pans', 'Includes water brushes'] },
+            { id: 18, name: 'Silk Sleep Mask', image: 'https://via.placeholder.com/400x300/1f2937/d1d5db?text=Sleep+Mask', tags: ['Self-Care', 'Thank You'], price: 22.00, originalPrice: 28.00, rating: 4.9, reviews: 280, popular: true, date: '2024-05-01', description: ['100% pure mulberry silk', 'Blocks out light completely'] },
+            { id: 19, name: 'Insulated Travel Mug', image: 'https://via.placeholder.com/400x300/16a34a/f0fdf4?text=Mug', tags: ['Corporate'], price: 28.50, originalPrice: 35.00, rating: 4.6, reviews: 205, popular: true, date: '2024-05-05', description: ['Keeps drinks hot for 6 hours', 'Leak-proof lid'] },
+            { id: 20, name: 'Artisanal Cheese Board', image: 'https://via.placeholder.com/400x300/f59e0b/fffbeb?text=Cheese+Board', tags: ['Gourmet', 'Thank You'], price: 49.00, originalPrice: 60.00, rating: 4.8, reviews: 90, popular: false, date: '2024-02-20', description: ['Acacia wood with utensil set', 'Perfect for entertaining'] },
+            { id: 21, name: 'Rose Petal Bath Soak', image: 'https://via.placeholder.com/400x300/f472b6/fce7f3?text=Bath+Soak', tags: ['Self-Care', 'Romance', 'Anniversary'], price: 18.00, originalPrice: 22.00, rating: 4.9, reviews: 155, popular: true, date: '2024-05-26', description: ['Made with real rose petals', 'Epsom and Himalayan salts'] },
+            { id: 22, name: 'Calligraphy Pen Set', image: 'https://via.placeholder.com/400x300/374151/e5e7eb?text=Calligraphy', tags: ['Creative', 'Birthday'], price: 39.99, originalPrice: 50.00, rating: 4.7, reviews: 88, popular: false, date: '2024-01-10', description: ['Feather quill pen with multiple nibs', 'Includes black ink bottle'] },
+            { id: 23, name: 'Gourmet Olive Oil', image: 'https://via.placeholder.com/400x300/84cc16/f7fee7?text=Olive+Oil', tags: ['Gourmet', 'Thank You'], price: 27.00, originalPrice: 32.00, rating: 4.9, reviews: 120, popular: false, date: '2024-03-15', description: ['Cold-pressed extra virgin olive oil', 'From a single estate in Italy'] },
+            { id: 24, name: 'Desktop Zen Garden', image: 'https://via.placeholder.com/400x300/a8a29e/f5f5f4?text=Zen+Garden', tags: ['Self-Care', 'Corporate', 'Thank You'], price: 34.00, originalPrice: 40.00, rating: 4.6, reviews: 105, popular: false, date: '2023-12-01', description: ['Miniature sand garden with rake', 'Promotes mindfulness and calm'] },
+            { id: 25, name: 'Herbal Tea Selection', image: 'https://via.placeholder.com/400x300/22c55e/f0fdf4?text=Tea+Set', tags: ['Gourmet', 'Self-Care', 'Thank You'], price: 26.00, originalPrice: 30.00, rating: 4.8, reviews: 160, popular: true, date: '2024-05-02', description: ['12 varieties of organic herbal teas', 'Caffeine-free options included'] },
+            { id: 26, name: 'Personalized Photo Frame', image: 'https://via.placeholder.com/400x300/71717a/e5e5e5?text=Photo+Frame', tags: ['Personalized', 'Anniversary', 'Birthday'], price: 42.00, originalPrice: 50.00, rating: 4.9, reviews: 220, popular: true, date: '2024-05-12', description: ['Engraved wooden frame', 'Fits a 5x7 photo'] },
+            { id: 27, name: 'Cocktail Mixing Set', image: 'https://via.placeholder.com/400x300/14b8a6/f0fdfa?text=Cocktail+Set', tags: ['Gourmet', 'Birthday'], price: 58.00, originalPrice: 75.00, rating: 4.7, reviews: 92, popular: false, date: '2024-01-20', description: ['Stainless steel shaker, jigger, and strainer', 'Includes a recipe book'] },
+            { id: 28, name: 'Aromatherapy Diffuser', image: 'https://via.placeholder.com/400x300/ec4899/fdf2f8?text=Diffuser', tags: ['Self-Care', 'Thank You'], price: 45.00, originalPrice: 55.00, rating: 4.8, reviews: 135, popular: false, date: '2024-04-10', description: ['Ultrasonic cool mist diffuser', 'With color-changing LED lights'] },
+            { id: 29, name: 'Charcuterie Essentials', image: 'https://via.placeholder.com/400x300/b45309/fff7ed?text=Charcuterie', tags: ['Gourmet', 'Combo', 'Corporate'], price: 95.00, originalPrice: 115.00, rating: 4.9, reviews: 80, popular: false, date: '2024-04-05', description: ['Selection of cured meats', 'Artisanal crackers and fruit preserves'] },
+            { id: 30, name: 'Handmade Leather Wallet', image: 'https://via.placeholder.com/400x300/57534e/e7e5e4?text=Wallet', tags: ['Personalized', 'Birthday', 'Anniversary'], price: 62.00, originalPrice: 75.00, rating: 4.9, reviews: 110, popular: false, date: '2024-03-01', description: ['Full-grain leather wallet', 'Option for custom monogramming'] },
+        ];
+        
+        const elements = { productGrid: document.getElementById('product-grid'), searchInput: document.getElementById('search-input'), filtersForm: document.getElementById('filters-sidebar'), priceRange: document.getElementById('price-range'), priceValue: document.getElementById('price-value'), minPriceLabel: document.getElementById('min-price-label'), activeFiltersContainer: document.getElementById('active-filters-container'), noResults: document.getElementById('no-results'), sortSelect: document.getElementById('sort-select'), paginationContainer: document.getElementById('pagination-container'), filterBtn: document.getElementById('filter-btn'), mobileFilters: document.getElementById('mobile-filters'), countrySelectorBtn: document.getElementById('country-selector-btn'), countryDropdown: document.getElementById('country-dropdown'), currencySelectorBtn: document.getElementById('currency-selector-btn'), currencyDropdown: document.getElementById('currency-dropdown'), };
+        let state = { products: products, activeFilters: { searchTerm: '', tags: [], maxPrice: 300, sort: 'popular' }, currentPage: 1, itemsPerPage: 9, };
+
+        const formatCurrency = (amount) => new Intl.NumberFormat(currencyConfig.locale, { style: 'currency', currency: currencyConfig.currency }).format(amount);
+        const getTagColor = (tag) => ({ 'Signature': 'bg-yellow-100 text-yellow-800', 'Combo': 'bg-blue-100 text-blue-800', 'Gourmet': 'bg-green-100 text-green-800', 'Creative': 'bg-purple-100 text-purple-800', 'Self-Care': 'bg-pink-100 text-pink-800', 'Corporate': 'bg-gray-200 text-gray-800', 'Romance': 'bg-red-100 text-red-800', 'Birthday': 'bg-indigo-100 text-indigo-800', 'Thank You': 'bg-teal-100 text-teal-800', 'Anniversary': 'bg-rose-100 text-rose-800', 'Personalized': 'bg-orange-100 text-orange-800'}[tag] || 'bg-gray-100 text-gray-800');
+        const convertPrice = (priceInUsd) => priceInUsd * conversionRates[currencyConfig.currency];
+
+        const renderProducts = () => {
+            const filtered = filterAndSortProducts();
+            elements.productGrid.innerHTML = '';
+            elements.noResults.classList.toggle('hidden', filtered.length > 0);
+            const paginated = filtered.slice((state.currentPage - 1) * state.itemsPerPage, state.currentPage * state.itemsPerPage);
+
+            paginated.forEach(product => {
+                const convertedPrice = convertPrice(product.price);
+                const convertedOriginalPrice = convertPrice(product.originalPrice);
+                const saveAmount = formatCurrency(convertedOriginalPrice - convertedPrice);
+                const descriptionHTML = product.description.map((item, index) => `<li class="${index >= 2 ? 'hidden' : ''}" ${index >= 2 ? 'data-expandable' : ''}>${item}</li>`).join('');
+                const tagsHTML = product.tags.slice(0, 2).map(tag => `<span class="text-xs font-semibold py-0.5 px-2 rounded-full ${getTagColor(tag)}">${tag}</span>`).join('');
+
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-md overflow-hidden flex flex-col transition-shadow hover:shadow-xl';
+                card.innerHTML = `
+                    <div class="relative"><img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover"><div class="absolute top-2 left-2 flex flex-wrap gap-1.5">${tagsHTML}</div></div>
+                    <div class="p-4 flex-grow flex flex-col">
+                        <h3 class="text-lg font-bold text-gray-800 truncate">${product.name}</h3>
+                        <div class="flex items-center mt-1 text-xs text-gray-500">
+                            <span>${product.rating.toFixed(1)}</span>
+                            <div class="flex items-center ml-1 text-yellow-400">${'★'.repeat(Math.round(product.rating))}${'☆'.repeat(5 - Math.round(product.rating))}</div>
+                            <span class="ml-2">(${product.reviews} Reviews)</span>
+                        </div>
+                        <div class="mt-2">
+                            <span class="text-2xl font-extrabold text-gray-900">${formatCurrency(convertedPrice)}</span>
+                            <span class="ml-1 text-md text-gray-500 line-through">${formatCurrency(convertedOriginalPrice)}</span>
+                        </div>
+                        <p class="mt-1 text-xs font-semibold text-green-600">SAVE ${saveAmount}</p>
+                        <ul class="mt-3 text-xs space-y-1 text-gray-600 list-disc list-inside flex-grow">${descriptionHTML}</ul>
+                        ${product.description.length > 2 ? `<button class="toggle-description mt-2 text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-0.5 flex items-center gap-1 hover:bg-gray-100 self-start">
+                            <span class="button-text">See more</span>
+                            <svg class="w-3 h-3 button-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>` : ''}
+                        <div class="mt-4 pt-4 border-t space-y-2">
+                            <button class="w-full bg-pink-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-pink-700 transition-colors">Buy Now</button>
+                            <button class="w-full bg-gray-100 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-200 transition-colors">Learn More</button>
+                        </div>
+                    </div>`;
+                elements.productGrid.appendChild(card);
+            });
+            renderPagination(filtered.length);
+            addCardEventListeners();
+        };
+        
+        const filterAndSortProducts = () => {
+            const { searchTerm, tags, maxPrice, sort } = state.activeFilters;
+            let filtered = [...state.products];
+            if (searchTerm) filtered = filtered.filter(p => p.name.toLowerCase().includes(searchTerm));
+            if (tags.length) filtered = filtered.filter(p => tags.every(t => p.tags.includes(t)));
+            filtered = filtered.filter(p => p.price <= maxPrice);
+
+            switch(sort) {
+                case 'price-asc': filtered.sort((a,b) => a.price - b.price); break;
+                case 'price-desc': filtered.sort((a,b) => b.price - a.price); break;
+                case 'newest': filtered.sort((a,b) => new Date(b.date) - new Date(a.date)); break;
+                case 'popular': default: filtered.sort((a, b) => (b.popular === a.popular) ? 0 : b.popular ? 1 : -1); break;
+            }
+            return filtered;
+        };
+
+        const renderPagination = (totalItems) => {
+            const totalPages = Math.ceil(totalItems / state.itemsPerPage);
+            elements.paginationContainer.innerHTML = '';
+            if(totalPages <= 1) return;
+            for(let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                pageButton.className = `relative inline-flex items-center px-4 py-2 border text-sm font-medium ${ i === state.currentPage ? 'z-10 bg-pink-50 border-pink-500 text-pink-600' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`;
+                pageButton.onclick = () => { state.currentPage = i; renderProducts(); window.scrollTo(0, 0); };
+                elements.paginationContainer.appendChild(pageButton);
+            }
+        };
+
+        const renderActiveFilters = () => {
+            elements.activeFiltersContainer.innerHTML = '';
+            if (!state.activeFilters.tags.length && state.activeFilters.maxPrice >= basePriceMax) return;
+
+            const title = document.createElement('span');
+            title.className = 'text-sm font-medium text-gray-700';
+            title.textContent = 'Active Filters:';
+            elements.activeFiltersContainer.appendChild(title);
+
+            state.activeFilters.tags.forEach(tag => elements.activeFiltersContainer.appendChild(createActiveFilterTag(tag, 'tag')));
+            if(state.activeFilters.maxPrice < basePriceMax) {
+                const convertedMaxPrice = convertPrice(state.activeFilters.maxPrice);
+                elements.activeFiltersContainer.appendChild(createActiveFilterTag(`Price < ${formatCurrency(convertedMaxPrice)}`, 'price'));
+            }
+
+            const clearAll = document.createElement('button');
+            clearAll.className = 'text-sm font-semibold text-blue-600 hover:underline ml-2';
+            clearAll.textContent = 'Clear All';
+            clearAll.onclick = resetFilters;
+            elements.activeFiltersContainer.appendChild(clearAll);
+        };
+
+        const createActiveFilterTag = (label, type) => {
+            const tag = document.createElement('span');
+            tag.className = 'inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-pink-100 text-pink-800';
+            tag.innerHTML = `${label} <button type="button" class="text-pink-600 hover:text-pink-800" data-type="${type}" data-value="${label}">&times;</button>`;
+            return tag;
+        };
+
+        const resetFilters = () => {
+            elements.filtersForm.reset();
+            state.activeFilters = { searchTerm: elements.searchInput.value, tags: [], maxPrice: basePriceMax, sort: elements.sortSelect.value };
+            updatePriceSliderAndLabels();
+            state.currentPage = 1;
+            renderAll();
+        };
+
+        const updatePriceSliderAndLabels = () => {
+            const convertedMin = Math.round(convertPrice(basePriceMin));
+            const convertedMax = Math.round(convertPrice(basePriceMax));
+            elements.priceRange.min = convertedMin;
+            elements.priceRange.max = convertedMax;
+            elements.priceRange.value = convertedMax; // Reset slider to max
+            elements.minPriceLabel.textContent = formatCurrency(convertedMin);
+            elements.priceValue.textContent = formatCurrency(convertedMax);
+        };
+
+        const renderAll = () => { renderProducts(); renderActiveFilters(); };
+        const addCardEventListeners = () => {
+            document.querySelectorAll('.toggle-description').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const cardBody = e.target.closest('.p-4');
+                    const expandableItems = cardBody.querySelectorAll('[data-expandable]');
+                    const buttonText = button.querySelector('.button-text');
+                    const buttonArrow = button.querySelector('.button-arrow');
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    expandableItems.forEach(item => item.classList.toggle('hidden'));
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    buttonText.textContent = isExpanded ? 'See more' : 'See less';
+                    buttonArrow.innerHTML = isExpanded ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>` : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7"></path>`;
+                });
+            });
+        };
+        
+        const setupEventListeners = () => {
+            elements.searchInput.addEventListener('input', (e) => { state.activeFilters.searchTerm = e.target.value.toLowerCase(); state.currentPage = 1; renderProducts(); });
+            elements.sortSelect.addEventListener('change', (e) => { state.activeFilters.sort = e.target.value; state.currentPage = 1; renderProducts(); });
+            elements.filtersForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                state.activeFilters.tags = Array.from(elements.filtersForm.querySelectorAll('input[type=checkbox]:checked')).map(el => el.value);
+                const currentSliderValue = parseFloat(elements.priceRange.value);
+                state.activeFilters.maxPrice = currentSliderValue / conversionRates[currencyConfig.currency]; // Convert back to base USD for filtering
+                state.currentPage = 1;
+                renderAll();
+                if (!elements.mobileFilters.classList.contains('hidden')) { elements.mobileFilters.classList.add('hidden'); }
+            });
+            elements.filtersForm.addEventListener('reset', (e) => { e.preventDefault(); resetFilters(); });
+            elements.priceRange.addEventListener('input', (e) => { elements.priceValue.textContent = formatCurrency(e.target.value); });
+            elements.activeFiltersContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    const { type, value } = e.target.dataset;
+                    if (type === 'price') {
+                        state.activeFilters.maxPrice = basePriceMax;
+                    } else {
+                        state.activeFilters.tags = state.activeFilters.tags.filter(item => item !== value);
+                        const checkbox = document.querySelector(`input[type="checkbox"][value="${value}"]`);
+                        if(checkbox) checkbox.checked = false;
+                    }
+                    state.currentPage = 1;
+                    renderAll();
+                }
+            });
+
+            const setupDropdown = (btn, menu) => btn.addEventListener('click', (e) => { e.stopPropagation(); menu.classList.toggle('hidden'); });
+            setupDropdown(elements.countrySelectorBtn, elements.countryDropdown);
+            setupDropdown(elements.currencySelectorBtn, elements.currencyDropdown);
+            window.addEventListener('click', () => { elements.countryDropdown.classList.add('hidden'); elements.currencyDropdown.classList.add('hidden'); });
+            
+            const handleCurrencyChange = (locale, currency) => {
+                currencyConfig = { locale, currency };
+                document.getElementById('selected-currency').textContent = currency;
+                updatePriceSliderAndLabels();
+                resetFilters(); // Reset filters to adapt to new currency range
+            };
+
+            elements.countryDropdown.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = e.target.closest('a');
+                if(!target) return;
+                document.getElementById('selected-country-flag').textContent = target.dataset.flag;
+                document.getElementById('selected-country-code').textContent = target.dataset.countryCode;
+                handleCurrencyChange(target.dataset.locale, target.dataset.currency);
+            });
+
+            elements.currencyDropdown.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = e.target.closest('a');
+                if(!target) return;
+                handleCurrencyChange(target.dataset.locale, target.dataset.currency);
+            });
+
+            elements.filterBtn.addEventListener('click', () => {
+                if (elements.mobileFilters.classList.contains('hidden')) {
+                    elements.mobileFilters.appendChild(elements.filtersForm);
+                    elements.mobileFilters.classList.remove('hidden');
+                } else {
+                    elements.mobileFilters.classList.add('hidden');
+                }
+            });
+        };
+
+        const init = () => {
+            setupEventListeners();
+            updatePriceSliderAndLabels(); // Set initial slider values for default currency
+            renderAll();
+        };
+
+        init();
+    });
+    </script>
+</body>
+</html>
